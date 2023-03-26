@@ -55,7 +55,7 @@ namespace Object_oriented_programming_project
             Player getPlayer = new Player("Петя", 2, 5, 0);
             Items getItems = new Items(false,false,0);
             Map[,] getMap = new Map[10,10];
-            Console.WriteLine("sss");
+            Console.WriteLine("111");
         }
     }
 }
