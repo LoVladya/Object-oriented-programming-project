@@ -85,7 +85,7 @@ namespace Object_oriented_programming_project
                 this.height = height;
                 FieldFilling();
             }
-            private void FieldFilling()
+            private void FieldFilling() // Наповнення масиву ігрового поля
             {
                 char[,] charField = new char[width, height];
                 for (int cellW = 0; cellW < width; cellW++)
@@ -101,7 +101,7 @@ namespace Object_oriented_programming_project
                     }
                 }
             }
-            public void PrintGameField()
+            public void PrintGameField() // Друк ігрового поля
             {
                 Console.Clear();
                 for (int i = 0; i < gameField.GetLength(0); i++)
@@ -134,11 +134,11 @@ namespace Object_oriented_programming_project
         {
             public Emptiness() : base(' ') { }
         }
-        class Motor
+        class Motor 
         {
             Map fieldForPlayer = new Map(15, 25);
             Coordinates coordPlayer = new Coordinates(10,10);
-            public void GameProcess() 
+            public void GameProcess() // Рух гравця
             {
                 bool gameFinish = false;
                 fieldForPlayer.PrintGameField();
