@@ -142,12 +142,11 @@ namespace Object_oriented_programming_project
             {
                 bool gameFinish = false;
                 fieldForPlayer.PrintGameField();
-                gameFinish = ProcessRun();
-                do 
+                while (!gameFinish)
                 {
                     Thread.Sleep(20);
                     gameFinish = ProcessRun();
-                } while(!gameFinish);
+                } 
             }
             private bool ProcessRun()
             {
