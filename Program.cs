@@ -92,7 +92,7 @@ namespace Object_oriented_programming_project
                 this.y = y;
             }
         }
-        class Items : Coordinates/////////////////////////////////
+        class Items:Coordinates
         {
             private bool itemUpgrade;
             private bool armor;
