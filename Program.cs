@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading;
 
 namespace Object_oriented_programming_project
 {
     internal class Program
     {
-        class Player:Coordinates
+        class Player : Coordinates
         {
-            private string Name;
+
+            private string name = "Player";
+            private int health 
+            {
+                get;
+                set;
+            }
             private int weaponLevel;
-            public int WeaponLevel
+            public int SetWeaponLevel
             {
                 get => weaponLevel;
                 set
@@ -21,11 +28,36 @@ namespace Object_oriented_programming_project
                     else
                         weaponLevel = value;
                 }
-            } 
-            public Player(string name, int weaponLevel):base(6,3)
+            }
+            public void TakeDamage(int value)
             {
-                this.Name = name;
-                this.weaponLevel = weaponLevel;
+                health += value;
+            }
+            public int GetHealth()
+            {
+                return health;
+            }
+            public Player(string name, int health) : base(3, 3)
+            {
+                this.name = name;
+                this.health = health;
+            }
+        }
+        class Maniac : Coordinates
+        {
+            private string name = "Маніяк";
+            private int health = 30;
+            public Maniac(int health) : base(7, 2)
+            {
+                this.health = health;
+            }
+            public int GetHealth()
+            {
+                return health;
+            }
+            public void SetHealth(int value)
+            {
+                health += value;
             }
         }
         class Coordinates
@@ -60,14 +92,13 @@ namespace Object_oriented_programming_project
                 this.y = y;
             }
         }
-        class Items:Coordinates
+        class Items : Coordinates/////////////////////////////////
         {
             private bool itemUpgrade;
             private bool armor;
-            private int  traps;
-            public Items(bool itemUpgrade, bool armor, int traps):base(1,1) 
+            private int traps;
+            public Items(bool itemUpgrade, bool armor, int traps) : base(1, 1)
             {
-
                 this.itemUpgrade = itemUpgrade;
                 this.armor = armor;
                 this.traps = traps;
@@ -80,26 +111,33 @@ namespace Object_oriented_programming_project
             private int height;
             public Map(int width, int height)
             {
-                this.gameField = new Elements[width, height];
+                gameField = new Elements[width, height];
                 this.width = width;
                 this.height = height;
                 FieldFilling();
             }
             private void FieldFilling() // Наповнення масиву ігрового поля
             {
-                char[,] charField = new char[width, height];
+                Random random = new Random();
                 for (int cellW = 0; cellW < width; cellW++)
                 {
-                    for (int cellH = 0; cellH < height; cellH++) 
+                    for (int cellH = 0; cellH < height; cellH++)
                     {
-                        if (cellW == 0 || cellW == width-1)
+                        if (cellW == 0 || cellW == width - 1)
                             gameField[cellW, cellH] = new Wall();
-                        else if (cellH == 0 || cellH == height-1)
+                        else if (cellH == 0 || cellH == height - 1)
                             gameField[cellW, cellH] = new Wall();
                         else
                             gameField[cellW, cellH] = new Emptiness();
                     }
                 }
+                void SetElements(Elements elem)
+                {
+                    gameField[random.Next(1, width - 1), random.Next(1, height - 1)] = elem;
+                }
+                SetElements(new Lifes());
+                SetElements(new Trap());
+                SetElements(new ManiacElem());
             }
             public void PrintGameField() // Друк ігрового поля
             {
@@ -111,83 +149,139 @@ namespace Object_oriented_programming_project
                         Console.Write(gameField[i, j].symbol.ToString() + ' ');
                     }
                     Console.WriteLine();
-                } 
+                }
+                Console.WriteLine();
             }
         }
         class Elements
         {
             public char symbol;
-            public Elements(char symbol) 
+            public bool tryToGo = true;
+            public Elements(char symbol)
             {
                 this.symbol = symbol;
             }
         }
-        class Wall:Elements
+        class Wall : Elements
         {
-            public Wall() : base('#') { }
+            public Wall() : base('#')
+            {
+                tryToGo = false;
+            }
         }
-        class setPlayer : Elements
+        class PlayerElem : Elements
         {
-            public setPlayer() : base('☺') { }
+            public PlayerElem() : base('☺')
+            {
+                tryToGo = true;
+            }
         }
-        class Emptiness:Elements
+        class ManiacElem : Elements
         {
-            public Emptiness() : base(' ') { }
+            public ManiacElem() : base('☼')//♦
+            {
+                tryToGo = true;
+            }
+        }
+        class Emptiness : Elements
+        {
+            public Emptiness() : base(' ')
+            {
+                tryToGo = true;
+            }
+        }
+        class Lifes : Elements
+        {
+            public Lifes() : base('♥')
+            {
+                tryToGo = true;
+            }
+        }
+        class Trap : Elements
+        {
+            public Trap() : base('†')
+            {
+                tryToGo = true;
+            }
         }
         class Motor 
         {
             Map fieldForPlayer = new Map(15, 25);
             Coordinates coordPlayer = new Coordinates(10,10);
+            Player player = new Player("vasya", 10);
+            Maniac maniac = new Maniac(30);
             public void GameProcess() // Рух гравця
             {
                 bool gameFinish = false;
+                
                 fieldForPlayer.PrintGameField();
                 while (!gameFinish)
                 {
+                    if(player.GetHealth() == 0 || maniac.GetHealth() == 0)
+                    {
+                        break;
+                    }
                     Thread.Sleep(20);
                     gameFinish = ProcessRun();
                 } 
             }
             private bool ProcessRun()
             {
+                int setX = coordPlayer.x, setY = coordPlayer.y;
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
-                    fieldForPlayer.gameField[coordPlayer.x,coordPlayer.y] = new Emptiness();
-                    
+                    fieldForPlayer.gameField[setX, setY] = new Emptiness();
                     switch (key.Key)
                     {
                         case ConsoleKey.UpArrow:
                         case ConsoleKey.W:
-                            coordPlayer.x--;
+                            setX--;
                             break;
 
                         case ConsoleKey.DownArrow:
                         case ConsoleKey.S:
-                            coordPlayer.x++;
+                            setX++;
                             break;
 
                         case ConsoleKey.LeftArrow:
                         case ConsoleKey.A:
-                            coordPlayer.y--;
+                            setY--;
                             break;
 
                         case ConsoleKey.RightArrow:
                         case ConsoleKey.D:
-                            coordPlayer.y++;
+                            setY++;
                             break;
 
                         case ConsoleKey.Escape:
                             return true;
                     }
+                    switch(fieldForPlayer.gameField[setX, setY].symbol)
+                    {
+                        case '♥':
+                            player.TakeDamage(1); 
+                            break;
+                        case '†':
+                            player.TakeDamage(-1);
+                            break;
+                    }
+                    if (!fieldForPlayer.gameField[setX, setY].tryToGo)
+                    {
+                       return false;
+                    }
                 }
-                fieldForPlayer.gameField[coordPlayer.x, coordPlayer.y] = new setPlayer();
+                coordPlayer.x = setX;
+                coordPlayer.y = setY;
+                fieldForPlayer.gameField[setX, setY] = new PlayerElem();
                 fieldForPlayer.PrintGameField();
+                Console.WriteLine("Кількість життів: "+player.GetHealth());
                 return false;
             }
         }
         public static void Main()
         {
+            Console.OutputEncoding = Encoding.Unicode;
             Motor game = new Motor();
             game.GameProcess();
         }
