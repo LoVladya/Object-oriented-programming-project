@@ -210,7 +210,7 @@ namespace Object_oriented_programming_project
             Coordinates coordPlayer = new Coordinates(10,10);
             Player player = new Player("vasya", 10);
             Maniac maniac = new Maniac(30);
-            public void GameProcess() // Рух гравця
+            public void GameProcess() // Запуск гри
             {
                 bool gameFinish = false;
                 
