@@ -1,0 +1,16 @@
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\obj\Debug\Object-oriented programming project.csproj.AssemblyReference.cache
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\obj\Debug\Object-oriented programming project.csproj.SuggestedBindingRedirects.cache
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\obj\Debug\Object-oriented programming project.csproj.CoreCompileInputs.cache
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\bin\Debug\Object-oriented programming project.exe.config
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\bin\Debug\Object-oriented programming project.exe
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\bin\Debug\Object-oriented programming project.pdb
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\obj\Debug\Object-oriented programming project.exe
+E:\Vladik\Універ\Програмування\Projects\Object-oriented programming project\obj\Debug\Object-oriented programming project.pdb
+E:\Vladik\Універ\Програмування\Object-oriented programming project\bin\Debug\Object-oriented programming project.exe.config
+E:\Vladik\Універ\Програмування\Object-oriented programming project\bin\Debug\Object-oriented programming project.exe
+E:\Vladik\Універ\Програмування\Object-oriented programming project\bin\Debug\Object-oriented programming project.pdb
+E:\Vladik\Універ\Програмування\Object-oriented programming project\obj\Debug\Object-oriented programming project.csproj.AssemblyReference.cache
+E:\Vladik\Універ\Програмування\Object-oriented programming project\obj\Debug\Object-oriented programming project.csproj.SuggestedBindingRedirects.cache
+E:\Vladik\Універ\Програмування\Object-oriented programming project\obj\Debug\Object-oriented programming project.csproj.CoreCompileInputs.cache
+E:\Vladik\Універ\Програмування\Object-oriented programming project\obj\Debug\Object-oriented programming project.exe
+E:\Vladik\Універ\Програмування\Object-oriented programming project\obj\Debug\Object-oriented programming project.pdb

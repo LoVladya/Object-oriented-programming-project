@@ -10,37 +10,60 @@ namespace Object_oriented_programming_project
     {
         class Player : Coordinates
         {
-
             private string name = "Player";
-            private int health 
+            private int health;
+            private int score;
+            
+            public int Health
             {
-                get;
-                set;
-            }
-            private int weaponLevel;
-            public int SetWeaponLevel
-            {
-                get => weaponLevel;
+                get => health; 
                 set
-                {
-                    if (value < 1)
-                        weaponLevel = 1;
-                    else
-                        weaponLevel = value;
+                { 
+                    health += value; 
                 }
             }
-            public void TakeDamage(int value)
+            public int Score
             {
-                health += value;
+                get => score;
+                set
+                {
+                    score += value;
+                }
             }
-            public int GetHealth()
-            {
-                return health;
-            }
+
             public Player(string name, int health) : base(3, 3)
             {
                 this.name = name;
                 this.health = health;
+            }
+        }
+        class Inventory 
+        {
+            private int armour;
+            private int weaponLevel;
+            public Inventory() 
+            { 
+                armour = 0;
+                weaponLevel = 0;
+            }
+            public int WeaponLevel
+            {
+                get => weaponLevel;
+                set
+                {
+                    weaponLevel += value;
+                }
+            }
+            public int Armour 
+            {
+                get => armour;
+                set
+                {
+                    Console.WriteLine(value);
+                    armour += value;
+                    Console.WriteLine(armour);
+                    Console.ReadKey();
+                }
             }
         }
         class Maniac : Coordinates
@@ -51,13 +74,13 @@ namespace Object_oriented_programming_project
             {
                 this.health = health;
             }
-            public int GetHealth()
+            public int Health
             {
-                return health;
-            }
-            public void SetHealth(int value)
-            {
-                health += value;
+                get => health; 
+                set 
+                { 
+                    health += value; 
+                }
             }
         }
         class Coordinates
@@ -109,6 +132,7 @@ namespace Object_oriented_programming_project
             public Elements[,] gameField;
             private int width;
             private int height;
+            Random random = new Random();
             public Map(int width, int height)
             {
                 gameField = new Elements[width, height];
@@ -118,7 +142,7 @@ namespace Object_oriented_programming_project
             }
             private void FieldFilling() // Наповнення масиву ігрового поля
             {
-                Random random = new Random();
+
                 for (int cellW = 0; cellW < width; cellW++)
                 {
                     for (int cellH = 0; cellH < height; cellH++)
@@ -131,13 +155,15 @@ namespace Object_oriented_programming_project
                             gameField[cellW, cellH] = new Emptiness();
                     }
                 }
-                void SetElements(Elements elem)
+                void SetElementsRandom(Elements elem)
                 {
                     gameField[random.Next(1, width - 1), random.Next(1, height - 1)] = elem;
                 }
-                SetElements(new Lifes());
-                SetElements(new Trap());
-                SetElements(new ManiacElem());
+                SetElementsRandom(new Lifes());
+                SetElementsRandom(new Trap());
+                SetElementsRandom(new ManiacElem());
+                SetElementsRandom(new ArmourOne());
+                SetElementsRandom(new ArmourTwo());
             }
             public void PrintGameField() // Друк ігрового поля
             {
@@ -153,7 +179,7 @@ namespace Object_oriented_programming_project
                 Console.WriteLine();
             }
         }
-        class Elements
+        abstract class Elements:Inventory
         {
             public char symbol;
             public bool tryToGo = true;
@@ -161,6 +187,7 @@ namespace Object_oriented_programming_project
             {
                 this.symbol = symbol;
             }
+            public virtual void Activity() { }
         }
         class Wall : Elements
         {
@@ -178,7 +205,7 @@ namespace Object_oriented_programming_project
         }
         class ManiacElem : Elements
         {
-            public ManiacElem() : base('☼')//♦
+            public ManiacElem() : base('☼')
             {
                 tryToGo = true;
             }
@@ -204,12 +231,36 @@ namespace Object_oriented_programming_project
                 tryToGo = true;
             }
         }
-        class Motor 
+        class ArmourOne : Elements // +1 броня
         {
-            Map fieldForPlayer = new Map(15, 25);
-            Coordinates coordPlayer = new Coordinates(10,10);
+            public ArmourOne() : base('1')
+            {
+                tryToGo = true;
+            }
+            public override void Activity() 
+            {
+                Armour = 1;
+            }
+        }
+        class ArmourTwo : Elements // +2 броня
+        {
+            public ArmourTwo() : base('2')
+            {
+                tryToGo = true;
+            }
+            public override void Activity()
+            {
+                Armour = 2;
+            }
+        }
+        class Motor
+        {
+
+            Map fieldForPlayer = new Map(15, 22);// easy - (10,15) medium - (15,22); hard - (20,30)
+            Coordinates coordPlayer = new Coordinates(7,12);
             Player player = new Player("vasya", 10);
             Maniac maniac = new Maniac(30);
+            Inventory inventory = new Inventory();
             public void GameProcess() // Запуск гри
             {
                 bool gameFinish = false;
@@ -217,13 +268,18 @@ namespace Object_oriented_programming_project
                 fieldForPlayer.PrintGameField();
                 while (!gameFinish)
                 {
-                    if(player.GetHealth() == 0 || maniac.GetHealth() == 0)
+                    if(player.Health == 0 || maniac.Health == 0)
                     {
                         break;
                     }
-                    Thread.Sleep(20);
+                    Thread.Sleep(20); // Таймер 20
                     gameFinish = ProcessRun();
                 } 
+            }
+            public void PrintInfo()
+            {
+                Console.WriteLine("Кількість життів: " + player.Health);
+                Console.WriteLine("Кількість броні: " + inventory.Armour);
             }
             private bool ProcessRun()
             {
@@ -260,22 +316,23 @@ namespace Object_oriented_programming_project
                     switch(fieldForPlayer.gameField[setX, setY].symbol)
                     {
                         case '♥':
-                            player.TakeDamage(1); 
+                            player.Health= 1; 
                             break;
                         case '†':
-                            player.TakeDamage(-1);
+                            player.Health = -1;
                             break;
                     }
                     if (!fieldForPlayer.gameField[setX, setY].tryToGo)
                     {
                        return false;
                     }
+                    fieldForPlayer.gameField[setX, setY].Activity();
                 }
                 coordPlayer.x = setX;
                 coordPlayer.y = setY;
                 fieldForPlayer.gameField[setX, setY] = new PlayerElem();
                 fieldForPlayer.PrintGameField();
-                Console.WriteLine("Кількість життів: "+player.GetHealth());
+                PrintInfo();
                 return false;
             }
         }
