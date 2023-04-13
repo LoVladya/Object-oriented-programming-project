@@ -44,8 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArmourOne.cs" />
+    <Compile Include="ArmourTwo.cs" />
+    <Compile Include="Coordinates.cs" />
+    <Compile Include="Elements.cs" />
+    <Compile Include="Emptiness.cs" />
+    <Compile Include="Inventory.cs" />
+    <Compile Include="Items.cs" />
+    <Compile Include="Lifes.cs" />
+    <Compile Include="Maniac.cs" />
+    <Compile Include="ManiacElem.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Motor.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerElem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trap.cs" />
+    <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
