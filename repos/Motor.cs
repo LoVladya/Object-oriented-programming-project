@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace Object_oriented_programming_project
 {
+    
         class Motor
         {
             static private string level = "easy";
@@ -36,7 +37,7 @@ namespace Object_oriented_programming_project
             }
             Map fieldForPlayer;
             Coordinates coordPlayer = new Coordinates(1, 1);
-            //Maniac maniac = new Maniac(30);
+            Maniac maniac = new Maniac(30);
             
             public void GameProcess() // Запуск гри
             {

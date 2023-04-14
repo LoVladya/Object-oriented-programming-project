@@ -29,7 +29,7 @@ namespace Object_oriented_programming_project
             }
         }
 
-        public Player(string name, int health) : base(0, 0)
+        public Player(string name, int health) : base(3, 3)
         {
             this.name = name;
             Health = health;

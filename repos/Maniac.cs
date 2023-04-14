@@ -10,7 +10,7 @@ namespace Object_oriented_programming_project
     {
         private string name = "Маніяк";
         private static int health = 30;
-        public Maniac(int health) : base(0, 0)
+        public Maniac(int health) : base(7, 2)
         {
             Health = health;
         }

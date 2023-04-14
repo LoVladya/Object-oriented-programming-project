@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Object_oriented_programming_project
 {
+
     class Coordinates
     {
         public int x;
