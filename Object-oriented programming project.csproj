@@ -44,24 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArmourOne.cs" />
-    <Compile Include="ArmourTwo.cs" />
-    <Compile Include="Coordinates.cs" />
-    <Compile Include="Elements.cs" />
-    <Compile Include="Emptiness.cs" />
-    <Compile Include="Inventory.cs" />
-    <Compile Include="Items.cs" />
-    <Compile Include="Lifes.cs" />
-    <Compile Include="Maniac.cs" />
-    <Compile Include="ManiacElem.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="Motor.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="PlayerElem.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class\Elements\ArmourOne.cs" />
+    <Compile Include="Class\Elements\ArmourTwo.cs" />
+    <Compile Include="Class\Elements\ChangingElem.cs" />
+    <Compile Include="Class\Elements\DesignElem.cs" />
+    <Compile Include="Class\Field\Output.cs" />
+    <Compile Include="Class\Field\SetElements.cs" />
+    <Compile Include="Class\Settings\SetLevel.cs" />
+    <Compile Include="Class\Settings\Settings.cs" />
+    <Compile Include="Class\Field\Coordinates.cs" />
+    <Compile Include="Class\Elements\Elements.cs" />
+    <Compile Include="Class\Elements\Emptiness.cs" />
+    <Compile Include="Class\States\Inventory.cs" />
+    <Compile Include="Class\Elements\Lifes.cs" />
+    <Compile Include="Class\Elements\Maniac.cs" />
+    <Compile Include="Class\Field\Map.cs" />
+    <Compile Include="Class\Motor\Motor.cs" />
+    <Compile Include="Class\Elements\Player.cs" />
+    <Compile Include="Class\Motor\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trap.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="Class\Elements\Trap.cs" />
+    <Compile Include="Class\Elements\WalkingElem.cs" />
+    <Compile Include="Class\Elements\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
