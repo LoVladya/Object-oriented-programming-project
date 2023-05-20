@@ -108,26 +108,13 @@ namespace Object_oriented_programming_project
             {
                 field[x, y + 1] = field[x, y - 1];
                 field[x, y] = emptiness;
-                //randomNumber = random.Next(1);
-
-                //if (randomNumber == 0)
-                //{
-                    field[x + 1, y + 1] = wall;
-                    maxIndex++;
-                    field[x + 2, y + 1] = maxIndex;
-                    if (field[x + 1, y - 1] != wall)
-                    {
-                        field[x + 2, y - 1] = field[x, y - 1];
-                    }
-                //}
-
-                /*if (randomNumber == 1)
+                field[x + 1, y + 1] = wall;
+                maxIndex++;
+                field[x + 2, y + 1] = maxIndex;
+                if (field[x + 1, y - 1] != wall)
                 {
-                    field[x + 1, y - 1] = wall;
-                    maxIndex++;
-                    field[x + 2, y - 1] = maxIndex;
-                    field[x + 2, y + 1] = field[x, y + 1];
-                }*/
+                    field[x + 2, y - 1] = field[x, y - 1];
+                }
             }
         }
 
