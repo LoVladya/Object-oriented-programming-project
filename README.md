@@ -2,5 +2,6 @@
 
 Game application
 
+## Applied technologies
 - C#
 - WinForms
